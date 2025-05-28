@@ -2,33 +2,35 @@
     <q-layout view="hHh lpR fFf">
         <q-header elevated class="bg-blue-8 text-white flex items-center justify-between px-6">
             <div class="flex items-center">
-                <q-btn flat round dense icon="menu" @click="drawer = !drawer" class="q-mr-md q-hidden-lg-up" />
-                <!--<img src="/logo.png" alt="Logo" class="h-8 w-8 mr-3" />-->
-                <span class="text-xl font-bold">SGMw</span>
+                <q-avatar size="40px" class="q-mr-sm">
+                    <img src="/logo.png" />
+                </q-avatar>
+                <span class="text-h6 text-weight-bold">SGMw</span>
             </div>
-            <div class="flex items-center">
-                <span class="mr-2">Hugo Silva</span>
-                <q-avatar>
-                    <img src="https://randomuser.me/api/portraits/men/1.jpg" />
+            <div class="flex items-center text-right">
+                <div class="mr-2 text-caption text-uppercase">Hugo Silva</div>
+                <q-avatar size="35px">
+                    <img src="/public/iconehugo.png" />
                 </q-avatar>
             </div>
         </q-header>
 
-        <q-drawer v-model="drawer" show-if-above side="left" bordered class="bg-blue-10 text-white">
+        <q-drawer v-model="drawer" show-if-above side="left" bordered class="text-white"
+            :style="{ backgroundColor: '#0b0b3b' }" :permanent="$q.screen.gt.sm">
             <q-list class="q-pa-sm menu-custom">
-                <q-item :to="'/'" clickable v-ripple tag="router-link" class="menu-item">
+                <q-item to="/" clickable v-ripple tag="router-link" class="menu-item">
                     <q-item-section avatar><q-icon name="home" /></q-item-section>
                     <q-item-section>Home</q-item-section>
                 </q-item>
-                <q-item :to="'/favoritos'" clickable v-ripple tag="router-link" class="menu-item">
+                <q-item to="/favoritos" clickable v-ripple tag="router-link" class="menu-item">
                     <q-item-section avatar><q-icon name="favorite" /></q-item-section>
                     <q-item-section>Favoritos</q-item-section>
                 </q-item>
-                <q-item :to="'/categorias'" clickable v-ripple tag="router-link" class="menu-item">
+                <q-item to="/categorias" clickable v-ripple tag="router-link" class="menu-item">
                     <q-item-section avatar><q-icon name="category" /></q-item-section>
                     <q-item-section>Categorias</q-item-section>
                 </q-item>
-                <q-item :to="'/sobre'" clickable v-ripple tag="router-link" class="menu-item">
+                <q-item to="/sobre" clickable v-ripple tag="router-link" class="menu-item">
                     <q-item-section avatar><q-icon name="info" /></q-item-section>
                     <q-item-section>Sobre</q-item-section>
                 </q-item>
@@ -38,16 +40,17 @@
         <q-page-container class="main-page">
             <router-view />
         </q-page-container>
-
     </q-layout>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-const drawer = ref(false)
+import { useQuasar } from 'quasar'
+const $q = useQuasar()
+const drawer = ref(true)
 </script>
 
-<style scoped>
+<style>
 .menu-custom {
     width: 100%;
     padding-top: 20px;
@@ -63,12 +66,17 @@ const drawer = ref(false)
 }
 
 .menu-item:hover {
-    background-color: #1a1a5c;
+    background-color: #0b0b3b;
     box-shadow: inset 2px 0 0 #ffffff;
 }
 
 .menu-item .q-icon {
     color: #ffffff;
+}
+
+.menu-item.router-link-exact-active {
+    background-color: #0b0b3b !important;
+    color: rgb(134, 134, 134);
 }
 
 .main-page {
