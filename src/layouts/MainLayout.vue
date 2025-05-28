@@ -1,102 +1,85 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
+    <q-layout view="hHh lpR fFf">
+        <q-header elevated class="bg-blue-8 text-white flex items-center justify-between px-6">
+            <div class="flex items-center">
+                <q-btn flat round dense icon="menu" @click="drawer = !drawer" class="q-mr-md q-hidden-lg-up" />
+                <!--<img src="/logo.png" alt="Logo" class="h-8 w-8 mr-3" />-->
+                <span class="text-xl font-bold">SGMw</span>
+            </div>
+            <div class="flex items-center">
+                <span class="mr-2">Hugo Silva</span>
+                <q-avatar>
+                    <img src="https://randomuser.me/api/portraits/men/1.jpg" />
+                </q-avatar>
+            </div>
+        </q-header>
 
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
+        <q-drawer v-model="drawer" show-if-above side="left" bordered class="bg-blue-10 text-white">
+            <q-list class="q-pa-sm menu-custom">
+                <q-item :to="'/'" clickable v-ripple tag="router-link" class="menu-item">
+                    <q-item-section avatar><q-icon name="home" /></q-item-section>
+                    <q-item-section>Home</q-item-section>
+                </q-item>
+                <q-item :to="'/favoritos'" clickable v-ripple tag="router-link" class="menu-item">
+                    <q-item-section avatar><q-icon name="favorite" /></q-item-section>
+                    <q-item-section>Favoritos</q-item-section>
+                </q-item>
+                <q-item :to="'/categorias'" clickable v-ripple tag="router-link" class="menu-item">
+                    <q-item-section avatar><q-icon name="category" /></q-item-section>
+                    <q-item-section>Categorias</q-item-section>
+                </q-item>
+                <q-item :to="'/sobre'" clickable v-ripple tag="router-link" class="menu-item">
+                    <q-item-section avatar><q-icon name="info" /></q-item-section>
+                    <q-item-section>Sobre</q-item-section>
+                </q-item>
+            </q-list>
+        </q-drawer>
 
-        <div>Quasar v{{ $q.version }}</div>
-      </q-toolbar>
-    </q-header>
+        <q-page-container class="main-page">
+            <router-view />
+        </q-page-container>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
-      <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
-
-        <EssentialLink
-          v-for="link in linksList"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer>
-
-    <q-page-container>
-      <router-view />
-    </q-page-container>
-  </q-layout>
+    </q-layout>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
-
-const linksList = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-]
-
-const leftDrawerOpen = ref(false)
-
-function toggleLeftDrawer () {
-  leftDrawerOpen.value = !leftDrawerOpen.value
-}
+const drawer = ref(false)
 </script>
+
+<style scoped>
+.menu-custom {
+    width: 100%;
+    padding-top: 20px;
+    background-color: #0b0b3b;
+}
+
+.menu-item {
+    border-radius: 6px;
+    margin: 4px 0;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    padding: 10px;
+    font-weight: 500;
+}
+
+.menu-item:hover {
+    background-color: #1a1a5c;
+    box-shadow: inset 2px 0 0 #ffffff;
+}
+
+.menu-item .q-icon {
+    color: #ffffff;
+}
+
+.main-page {
+    padding: 30px;
+    background-color: #f4f4f4;
+    min-height: calc(100vh - 60px);
+}
+
+.main-page h1 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+</style>

@@ -1,40 +1,48 @@
-# SGBR (sgbr)
+# HypeGIF
 
-Teste vaga SGBR
+Aplicação web que consome a API do GIPHY para exibir GIFs populares, organizados por categorias e com a funcionalidade de favoritar. Projeto desenvolvido com **Vue.js** e **Quasar Framework**.
 
-## Install the dependencies
+## 🚀 Tecnologias Utilizadas
+
+- [Vue.js 3](https://vuejs.org/)
+- [Quasar Framework](https://quasar.dev/)
+- [GIPHY API](https://developers.giphy.com/)
+- [JavaScript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
+
+## 📦 Pré-requisitos
+
+npm install -g @quasar/cli
+
 ```bash
-yarn
-# or
+node -v
+npm -v
+
+🔧 Como rodar o projeto
+
+Clone o repositório:
+
+git clone https://github.com/hugosbss/hypegif.git
+cd hypegif
+
+Instale as dependências:
+
 npm install
-```
+Rode o servidor de desenvolvimento:
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-```bash
 quasar dev
-```
+Acesse o projeto no navegador: http://localhost:9000
 
 
-### Lint the files
-```bash
-yarn lint
-# or
-npm run lint
-```
+🧠 Funcionalidades:
 
+- 🔍 Buscar GIFs em alta
 
-### Format the files
-```bash
-yarn format
-# or
-npm run format
-```
+- 💖 Favoritar GIFs
 
+- 🗂️ Filtrar por categorias
 
-### Build the app for production
-```bash
-quasar build
-```
-
-### Customize the configuration
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
+src/
+├── components/       # Componentes reutilizáveis
+├── pages/            # Páginas principais (Home, Favoritos, etc.)
+├── router/           # Rotas definidas do app
+└── App.vue           # Componente raiz
